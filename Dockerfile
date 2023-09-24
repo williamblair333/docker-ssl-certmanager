@@ -13,7 +13,7 @@ RUN apt-get --quiet --quiet --yes update 1>/dev/null && \
 RUN pip install paramiko
 
 # Create a directory for the .py file and certs
-RUN mkdir -p /app/certs
+RUN mkdir --parents /app/certs
 COPY ./app/* /app/
 
 # Set the working directory in the container to /app
