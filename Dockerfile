@@ -15,6 +15,7 @@ RUN pip install paramiko
 # Create a directory for the .py file and certs
 RUN mkdir --parents /app/certs
 COPY ./app/* /app/
+COPY ssl-cert-manager /root/.ssh/
 COPY ssl-cert-manager.* /root/.ssh/
 
 # Set the working directory in the container to /app
