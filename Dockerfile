@@ -20,8 +20,9 @@ COPY ssl-cert-manager /root/.ssh/
 COPY ssl-cert-manager.* /root/.ssh/
 
 # fix permissions in /root
-RUN chmod 700 /root/.ssh && \
-    chmod 600 /root/.ssh/authorized_keys
+RUN touch /root/.ssh/authorized_keys && \
+    chmod -R 0700 /root/.ssh && \
+    chmod 0600 /root/.ssh/authorized_keys
 
 # Set the working directory in the container to /app
 WORKDIR /app
