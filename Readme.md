@@ -20,10 +20,10 @@ Docker SSL Cert Manager is a Dockerized solution for managing SSL/TLS certificat
 docker-ssl-cert-manager/  
 ├── Dockerfile: Defines the Docker container including the necessary dependencies.  
 ├── docker-compose.yml: Docker Compose configuration file.  
-├── file_transfer_util.py: Utility for transferring files to remote servers.  
-├── setup-cert.py: Script to generate SSL certificates.  
-├── ssh_util.py: Utility for creating SSH connections and executing commands on remote servers.  
-├── web_server_util.py: Script to restart the web server on a remote server.  
+├── .app/file_transfer_util.py: Utility for transferring files to remote servers.  
+├── .app/setup-cert.py: Script to generate SSL certificates.  
+├── .app/ssh_util.py: Utility for creating SSH connections and executing commands on remote servers.  
+├── .app/web_server_util.py: Script to restart the web server on a remote server.  
 
 ## Getting Started
 
@@ -35,14 +35,14 @@ docker-ssl-cert-manager/
 2. **Generate a certificate for a domain**:
 
     ```bash
-    docker-compose run ca python setup-cert.py mydomain
+    docker-compose run --rm ca python setup-cert.py mydomain
     ```
 
 3. **Transfer the generated certificate and key to a remote server**:
 
     ```bash
-    docker-compose run --remove ca python file_transfer_util.py /certs/mydomain.crt user@remote-server:/path/to/certs/
-    docker-compose run --remove ca python file_transfer_util.py /certs/mydomain.key user@remote-server:/path/to/certs/
+    docker-compose run  --rm ca python file_transfer_util.py /certs/mydomain.crt user@remote-server:/path/to/certs/
+    docker-compose run  --rm ca python file_transfer_util.py /certs/mydomain.key user@remote-server:/path/to/certs/
     ```
 
 4. **Restart the web server on the remote server to apply the new certificate**:
