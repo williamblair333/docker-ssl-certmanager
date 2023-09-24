@@ -43,23 +43,25 @@ docker-ssl-cert-manager/
     ```bash
     docker-compose run --rm ca python file_transfer_util.py --key ~/.ssh/id_rsa --source /app/certs/mydomain.crt --target user@remote-server:/etc/ssl/certs/
     docker-compose run --rm ca python file_transfer_util.py --key ~/.ssh/id_rsa --source /app/certs/mydomain.key --target user@remote-server:/etc/ssl/private/
-    
-    docker-compose run --rm ca python file_transfer_util.py --key ~/.ssh/id_rsa --source /app/certs/thricecrowned.local.crt --target root@172.16.0.20:/etc/ssl/certs/thricecrowned.local.crt
-    docker-compose run --rm ca python file_transfer_util.py --key ~/.ssh/id_rsa --source /app/certs/thricecrowned.local.key --target root@172.16.0.20:/etc/ssl/private/thricecrowned.local.key
-    
-    python ssh_util.py --key ~/.ssh/ssl-cert-manager --server 172.16.0.20 --command "chmod 0644 /etc/ssl/certs/thricecrowned.local.crt"
-    python ssh_util.py --key ~/.ssh/ssl-cert-manager --server 172.16.0.20 --command "chmod 0640 /etc/ssl/private/thricecrowned.local.key"
-    python ssh_util.py --key ~/.ssh/ssl-cert-manager --server 172.16.0.20 --command "a2enmod ssl"
-    python ssh_util.py --key ~/.ssh/ssl-cert-manager --server 172.16.0.20 --command "service apache2 restart"
-    
-
-
     docker-compose run --rm ca python ssh_util.py --key ~/.ssh/id_rsa --server remote-server --command "chmod 0644 /etc/ssl/certs/mydomain.crt"
     docker-compose run --rm ca python ssh_util.py --key ~/.ssh/id_rsa --server remote-server --command "chmod 0640 /etc/ssl/private/mydomain.key"    
     docker-compose run --rm ca python ssh_util.py --key ~/.ssh/id_rsa --server remote-server --command "a2enmod ssl"
-    docker-compose run --rm ca python ssh_util.py --key ~/.ssh/id_rsa --server remote-server --command "service apache2 restart"
+    #Restart the apache2 container here
+    #docker-compose run --rm ca python ssh_util.py --key ~/.ssh/id_rsa --server remote-server --command "service apache2 restart"
     
-    etc/ssl/private/thricecrowned.local.key
+    docker-compose run --rm ca python file_transfer_util.py --key ~/.ssh/ssl-cert-manager --source /app/certs/thricecrowned.local.crt --target root@172.16.0.20:/etc/ssl/certs/thricecrowned.local.crt
+    docker-compose run --rm ca python file_transfer_util.py --key ~/.ssh/ssl-cert-manager --source /app/certs/thricecrowned.local.key --target root@172.16.0.20:/etc/ssl/private/thricecrowned.local.key --hostkey /root/.ssh/ssl-cert-manager.pub
+    
+    docker-compose run --rm ca python ssh_util.py --key /path/to/private/key --server 192.168.1.1 --command "uptime" --hostkey /path/to/remote/host/key.pub
+
+    
+    docker-compose run --rm ca python ssh_util.py --key ~/.ssh/ssl-cert-manager --server 172.16.0.20 --command "chmod 0644 /etc/ssl/certs/thricecrowned.local.crt"
+    docker-compose run --rm ca python ssh_util.py --key ~/.ssh/ssl-cert-manager --server 172.16.0.20 --command "chmod 0640 /etc/ssl/private/thricecrowned.local.key"
+    docker-compose run --rm ca python ssh_util.py --key ~/.ssh/ssl-cert-manager --server 172.16.0.20 --command "a2enmod ssl"
+    #Restart the apache2 container here
+    #python ssh_util.py --key ~/.ssh/ssl-cert-manager --server 172.16.0.20 --command "service apache2 restart"
+    
+
     ```
 
 4. **Restart the web server on the remote server to apply the new certificate**:
