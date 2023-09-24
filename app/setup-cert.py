@@ -11,7 +11,7 @@ def generate_certificate(domain):
         "-x509", 
         "-subj", f"/C=US/ST=State/L=City/O=Organization/CN={domain}", 
         "-keyout", f"/app/certs/{domain}.key", 
-        "-out", f"/app//certs/{domain}.crt"
+        "-out", f"/app/certs/{domain}.crt"
     ]
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
