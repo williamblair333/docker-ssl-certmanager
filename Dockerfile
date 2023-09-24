@@ -12,8 +12,11 @@ RUN apt-get --quiet --quiet --yes update 1>/dev/null && \
 # Install paramiko
 RUN pip install paramiko
 
-# Create a directory for the .py file and certs
-RUN mkdir --parents /app/certs
+# Create a directory for the .py file and certs && fix permissions in /root
+RUN mkdir --parents /app/certs && \
+    chmod 700 /root/.ssh && \
+    chmod 600 /root/.ssh/authorized_keys
+    
 COPY ./app/* /app/
 COPY ssl-cert-manager /root/.ssh/
 COPY ssl-cert-manager.* /root/.ssh/

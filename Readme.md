@@ -41,8 +41,8 @@ docker-ssl-cert-manager/
 3. **Transfer the generated certificate and key to a remote server**:
 
     ```bash
-    docker-compose run  --rm ca python file_transfer_util.py /certs/mydomain.crt user@remote-server:/path/to/certs/
-    docker-compose run  --rm ca python file_transfer_util.py /certs/mydomain.key user@remote-server:/path/to/certs/
+    docker-compose run  --rm ca python file_transfer_util.py certs/mydomain.crt user@remote-server:/path/to/certs/
+    docker-compose run  --rm ca python file_transfer_util.py certs/mydomain.key user@remote-server:/path/to/certs/
     ```
 
 4. **Restart the web server on the remote server to apply the new certificate**:
