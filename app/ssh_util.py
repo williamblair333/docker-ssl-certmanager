@@ -1,10 +1,15 @@
-from paramiko import SSHClient, AutoAddPolicy
-import sys
+#python ssh_util.py --server 192.168.1.1 --command "uptime" --key /path/to/private/key
 
-def create_ssh_client(server_ip):
+from paramiko import SSHClient, AutoAddPolicy
+import argparse
+
+def create_ssh_client(server_ip, key_path=None):
     ssh = SSHClient()
     ssh.set_missing_host_key_policy(AutoAddPolicy())
-    ssh.connect(server_ip)
+    if key_path:
+        ssh.connect(server_ip, key_filename=key_path)
+    else:
+        ssh.connect(server_ip)
     return ssh
 
 def execute_command(ssh, command):
@@ -12,9 +17,19 @@ def execute_command(ssh, command):
     error = stderr.read().decode()
     if error:
         print(f"Failed to execute command: {error}")
-        sys.exit(1)
     else:
         print(stdout.read().decode())
 
 def close_ssh_client(ssh):
     ssh.close()
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Execute commands on a remote server via SSH.')
+    parser.add_argument('--server', required=True, help='IP address of the remote server')
+    parser.add_argument('--command', required=True, help='Command to execute on the remote server')
+    parser.add_argument('--key', help='Path to the authentication key', default=None)
+    args = parser.parse_args()
+
+    ssh = create_ssh_client(args.server, args.key)
+    execute_command(ssh, args.command)
+    close_ssh_client(ssh)

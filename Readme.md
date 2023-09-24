@@ -38,11 +38,18 @@ docker-ssl-cert-manager/
     docker-compose run --rm ca python setup-cert.py mydomain
     ```
 
-3. **Transfer the generated certificate and key to a remote server**:
+3. **Transfer the generated certificate and key to a remote server. apache2 is used in this example**:
 
     ```bash
-    docker-compose run  --rm ca python file_transfer_util.py certs/mydomain.crt user@remote-server:/path/to/certs/
-    docker-compose run  --rm ca python file_transfer_util.py certs/mydomain.key user@remote-server:/path/to/certs/
+    docker-compose run --rm ca python file_transfer_util.py --key ~/.ssh/id_rsa --source /app/certs/mydomain.crt --target user@remote-server:/etc/ssl/certs/
+    docker-compose run --rm ca python file_transfer_util.py --key ~/.ssh/id_rsa --source /app/certs/mydomain.key --target user@remote-server:/etc/ssl/private/
+    
+    docker-compose run --rm ca python file_transfer_util.py --key ~/.ssh/id_rsa --source /app/certs/thricecrowned.local.crt --target root@172.16.0.20:/etc/ssl/certs/thricecrowned.local.crt
+    docker-compose run --rm ca python file_transfer_util.py --key ~/.ssh/id_rsa --source /app/certs/thricecrowned.local.key --target root@172.16.0.20:/etc/ssl/private/thricecrowned.local.key
+    
+    
+    
+    etc/ssl/private/thricecrowned.local.key
     ```
 
 4. **Restart the web server on the remote server to apply the new certificate**:
