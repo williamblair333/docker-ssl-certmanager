@@ -20,4 +20,4 @@ COPY ./app/* /app/
 WORKDIR /app
 
 # Command to keep the container running indefinitely troubleshooting
-#CMD ["tail", "-f", "/dev/null"]
+CMD ["tail", "-f", "/dev/null"]
