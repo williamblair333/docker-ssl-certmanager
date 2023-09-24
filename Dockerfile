@@ -14,7 +14,7 @@ RUN pip install paramiko
 
 # Create a directory for the .py file and certs
 RUN mkdir -p /app/certs
-COPY *.py /app
+COPY ./app/* /app/
 
 # Set the working directory in the container to /app
 WORKDIR /app
