@@ -17,13 +17,13 @@ Docker SSL Cert Manager is a Dockerized solution for managing SSL/TLS certificat
 
 ## Directory Structure
 
-docker-ssl-cert-manager/
-├── Dockerfile: Defines the Docker container including the necessary dependencies.
-├── docker-compose.yml: Docker Compose configuration file.
-├── file_transfer_util.py: Utility for transferring files to remote servers.
-├── setup-cert.py: Script to generate SSL certificates.
-├── ssh_util.py: Utility for creating SSH connections and executing commands on remote servers.
-├── web_server_util.py: Script to restart the web server on a remote server.
+docker-ssl-cert-manager/  
+├── Dockerfile: Defines the Docker container including the necessary dependencies.  
+├── docker-compose.yml: Docker Compose configuration file.  
+├── file_transfer_util.py: Utility for transferring files to remote servers.  
+├── setup-cert.py: Script to generate SSL certificates.  
+├── ssh_util.py: Utility for creating SSH connections and executing commands on remote servers.  
+├── web_server_util.py: Script to restart the web server on a remote server.  
 
 ## Getting Started
 
