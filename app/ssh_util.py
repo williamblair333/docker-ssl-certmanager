@@ -1,4 +1,5 @@
-#python ssh_util.py --server 192.168.1.1 --command "uptime" --key /path/to/private/key
+#python ssh_util.py --key /path/to/private/key --server 192.168.1.1 --command "uptime"
+#python ssh_util.py --key ~/.ssh/ssl-cert-manager --server 172.16.0.20 --command "uptime"
 
 from paramiko import SSHClient, AutoAddPolicy
 import argparse
