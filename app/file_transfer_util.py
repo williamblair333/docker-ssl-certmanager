@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 def transfer_file(src_path, dest_ip, dest_path):
-    scp_command = f'scp {src_path} {dest_ip}:{dest_path}'
+    scp_command = f'scp  {src_path} {dest_ip}:{dest_path}'
     process = subprocess.Popen(scp_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
 
