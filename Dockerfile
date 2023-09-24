@@ -12,8 +12,9 @@ RUN apt-get --quiet --quiet --yes update 1>/dev/null && \
 # Install paramiko
 RUN pip install paramiko
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Create a directory for the .py file and certs
+RUN mkdir -p /app/certs
+COPY *.py /app
 
 # Set the working directory in the container to /app
 WORKDIR /app

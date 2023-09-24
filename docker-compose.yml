@@ -1,4 +1,9 @@
 version: '3'
+
 services:
   ca:
     build: .
+    volumes:
+      - type: bind
+        source: ./app/certs
+        target: /app/certs
