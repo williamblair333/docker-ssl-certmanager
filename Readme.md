@@ -1,4 +1,4 @@
- Docker SSL Cert Manager
+# Docker SSL Cert Manager
 
 Docker SSL Cert Manager is a Dockerized solution for managing SSL/TLS certificates for your local domains using a private Certificate Authority (CA). This project encapsulates the process of certificate generation, distribution to a web server, executing arbitrary commands on the remote server, and restarting the web server, all within a Docker container.
 
