@@ -52,7 +52,9 @@ docker-ssl-cert-manager/
     docker-compose run --rm ca python file_transfer_util.py --key /root/.ssh/ssl-cert-manager --source /app/certs/thricecrowned.local.crt --target root@172.16.0.20:/etc/ssl/certs/thricecrowned.local.crt
     docker-compose run --rm ca python file_transfer_util.py --key /root/.ssh/ssl-cert-manager --source /app/certs/thricecrowned.local.key --target root@172.16.0.20:/etc/ssl/private/thricecrowned.local.key 
     
-    docker-compose run --rm ca python ssh_util.py --key /root/.ssh/ssl-cert-manager --server 192.168.1.1 --command "uptime" --hostkey /root/.ssh/ssl-cert-manager.pub
+    docker-compose run --rm ca python ssh_util.py --key /root/.ssh/ssl-cert-manager --server 172.16.0.20 --command "uptime" --hostkey /root/.ssh/ssl-cert-manager.pub --hostkey /root/.ssh/ssl-cert-manager.pub
+    docker-compose run --rm ca python ssh_util.py --key /root/.ssh/ssl-cert-manager --server 172.16.0.20 --command "uptime" --hostkey /path/to/remote/host/key.pub
+
     docker-compose run --rm ca python ssh_util.py --key /root/.ssh/ssl-cert-manager --server 172.16.0.20 --command "chmod 0644 /etc/ssl/certs/thricecrowned.local.crt" --hostkey /root/.ssh/ssl-cert-manager.pub
     docker-compose run --rm ca python ssh_util.py --key /root/.ssh/ssl-cert-manager --server 172.16.0.20 --command "chmod 0640 /etc/ssl/private/thricecrowned.local.key"
     docker-compose run --rm ca python ssh_util.py --key /root/.ssh/ssl-cert-manager --server 172.16.0.20 --command "a2enmod ssl"

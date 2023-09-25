@@ -5,13 +5,11 @@ import os
 def create_ssh_client(server_ip, key_path=None, host_key_path=None):
     ssh = SSHClient()
     if host_key_path and os.path.isfile(host_key_path):
-        # Load the host key
         host_key = RSAKey(filename=host_key_path)
-        # Add the host key
-        ssh.get_host_keys().add(server_ip, 'ssh-rsa', host_key)
+        ssh.connect(server_ip, key_filename=key_path, pkey=host_key)
     else:
         ssh.set_missing_host_key_policy(AutoAddPolicy())
-    ssh.connect(server_ip, key_filename=key_path)
+        ssh.connect(server_ip, key_filename=key_path)
     return ssh
 
 def execute_command(ssh, command):
