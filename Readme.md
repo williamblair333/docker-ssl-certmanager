@@ -51,9 +51,9 @@ docker-ssl-cert-manager/
 
     docker-compose run --rm ca python ssh_util.py --key /root/.ssh/id_rsa --server web-server-ip --command "bash -c \"echo -e '<VirtualHost *:443>\\n    ServerAdmin webmaster@mydomain\\n    ServerName mydomain\\n    DocumentRoot /var/www/html\\n    ErrorLog ${APACHE_LOG_DIR}/error.log\\n    CustomLog ${APACHE_LOG_DIR}/access.log combined\\n    # Enable SSL\\n    SSLEngine on\\n    SSLCertificateFile /etc/ssl/certs/mydomain.crt\\n    SSLCertificateKeyFile /etc/ssl/private/mydomain.key\\n</VirtualHost>' > /etc/apache2/sites-available/mydomain.conf\" && a2ensite mydomain.conf && apachectl configtest"
     docker-compose run --rm ca python ssh_util.py --key /root/.ssh/id_rsa --server web-server-ip --command "a2enmod ssl"
-#Restart the apache2 container here
+    Restart the apache2 container here  
+    docker-compose restart
     ```
-
 4. **Restart the web server on the remote server to apply the new certificate**:
 
     ```bash
