@@ -71,3 +71,6 @@ docker-ssl-cert-manager/
 
 - The `docker-compose run` commands allow you to execute the scripts within the Docker container while interacting with remote servers.
 - Ensure the remote server accepts SSH connections and the specified user has the necessary permissions to write to the `/path/to/certs/` directory and restart the web server.
+
+## Test apache2 image and container
+A docker apache2 image using Debian Bookworm is attached for convenience to illustrate / test adding the certs.
